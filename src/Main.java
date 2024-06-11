@@ -6,21 +6,16 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-
         int n = getPositiveInteger(scanner, "Введите размер массива (положительное целое число): ");
 
+        int x = getInteger(scanner, "Введите пороговое значение: ");
 
-        double x = getDouble(scanner, "Введите пороговое значение: ");
-
-
-        double[] randomArray = generateRandomArray(n);
-
+        int[] randomArray = generateRandomArray(n);
 
         ArrayList<Integer> indicesAboveThreshold = getIndicesAboveThreshold(randomArray, x);
 
-
         System.out.print("Сгенерированный массив: ");
-        for (double num : randomArray) {
+        for (int num : randomArray) {
             System.out.print(num + " ");
         }
         System.out.println();
@@ -32,7 +27,7 @@ public class Main {
         System.out.println();
     }
 
-
+   
     private static int getPositiveInteger(Scanner scanner, String prompt) {
         int value = 0;
         while (true) {
@@ -46,40 +41,40 @@ public class Main {
                 }
             } else {
                 System.out.println("Некорректный ввод. Пожалуйста, введите целое число.");
-                scanner.next(); // очистка некорректного ввода
+                scanner.next(); 
             }
         }
         return value;
     }
 
-
-    private static double getDouble(Scanner scanner, String prompt) {
-        double value = 0.0;
+   
+    private static int getInteger(Scanner scanner, String prompt) {
+        int value = 0;
         while (true) {
             System.out.print(prompt);
-            if (scanner.hasNextDouble()) {
-                value = scanner.nextDouble();
+            if (scanner.hasNextInt()) {
+                value = scanner.nextInt();
                 break;
             } else {
-                System.out.println("Некорректный ввод. Пожалуйста, введите число.");
-                scanner.next(); // очистка некорректного ввода
+                System.out.println("Некорректный ввод. Пожалуйста, введите целое число.");
+                scanner.next(); 
             }
         }
         return value;
     }
 
 
-    private static double[] generateRandomArray(int n) {
+    private static int[] generateRandomArray(int n) {
         Random random = new Random();
-        double[] array = new double[n];
+        int[] array = new int[n];
         for (int i = 0; i < n; i++) {
-            array[i] = 0 + (100 - 0) * random.nextDouble();
+            array[i] = random.nextInt(101); 
         }
         return array;
     }
 
 
-    private static ArrayList<Integer> getIndicesAboveThreshold(double[] array, double x) {
+    private static ArrayList<Integer> getIndicesAboveThreshold(int[] array, int x) {
         ArrayList<Integer> indices = new ArrayList<>();
         for (int i = 0; i < array.length; i++) {
             if (array[i] > x) {
